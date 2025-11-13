@@ -1,0 +1,52 @@
+# .github/workflows/minify.yml
+
+name: Minify HTML and Commit
+
+on:
+  push:
+    branches:
+      - main  # Triggers the action on any push to the 'main' branch
+
+jobs:
+  minify_and_commit:
+    permissions:
+      contents: write
+    runs-on: ubuntu-latest # Uses a standard Linux virtual machine
+    steps:
+      # Step 1: Check out the repository's code
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      # Step 2: Set up Node.js (which has npm)
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20' # Use a current LTS version
+
+      # Step 3: Install the 'html-minifier-terser' tool
+      - name: Install html-minifier-terser
+        run: npm install html-minifier-terser -g
+
+      # Step 4: Run the minifier on your index.html file
+      - name: Minify index.html
+        run: |
+          html-minifier-terser --collapse-whitespace \
+                               --remove-comments \
+                               --remove-optional-tags \
+                               --remove-redundant-attributes \
+                               --remove-script-type-attributes \
+                               --remove-tag-whitespace \
+                               --use-short-doctype \
+                               --minify-css true \
+                               --minify-js true \
+                               --output docs/index.html \
+                               index.html
+
+      # Step 5: Commit the minified file back to the 'main' branch
+      - name: Commit and push if changed
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          # This commit message is crucial!
+          commit_message: "chore: Minify index.html [skip ci]"
+          branch: main
+          file_pattern: docs/index.html # Only commit if index.html changed
