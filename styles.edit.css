@@ -140,6 +140,7 @@ h2 {
     font-size: 2.5rem;
     margin-bottom: 2rem;
     background: linear-gradient(to right, #fff, #9ca3af);
+    background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
@@ -222,4 +223,10 @@ footer {
     }
 
     /* Simple hide for mobile for now, or stack */
+}
+
+.nav-logo-svg {
+    height: 30px;
+    width: auto;
+    fill: var(--text-color);
 }
