@@ -40,13 +40,13 @@ jobs:
                                --minify-css true \
                                --minify-js true \
                                --output docs/index.html \
-                               index.html
+                               index.edit.html
 
       # Step 5: Commit the minified file back to the 'main' branch
       - name: Commit and push if changed
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           # This commit message is crucial!
-          commit_message: "chore: Minify index.html [skip ci]"
+          commit_message: "chore: Minify index.edit.html [skip ci]"
           branch: main
-          file_pattern: docs/index.html # Only commit if index.html changed
+          file_pattern: docs/index.edit.html # Only commit if index.edit.html changed
