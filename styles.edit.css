@@ -93,7 +93,7 @@ section {
 /* Hero Section */
 #hero {
     min-height: 100vh;
-    padding-top: 0;
+    padding: 0;
     /* Account for nav if needed, but centering handles it */
     position: relative;
     overflow: hidden;
@@ -108,6 +108,12 @@ section {
     align-items: center;
     width: 90%;
     max-width: 1000px;
+}
+
+#content-container svg {
+    width: 100%;
+    height: auto;
+    max-height: 80vh;
 }
 
 /* Mission Section */
